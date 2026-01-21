@@ -1,14 +1,33 @@
 ---
 name: Commit
-description: Anti-fatigue protocol for atomic commits and conventional formatting. Use for staging/committing changes.
+description: Anti-fatigue protocol for atomic commits and conventional formatting. Optimized for AI automation while maintaining atomic conventional commits. Use for staging/committing changes.
 ---
 **CORE PRINCIPLE: ONE logical change = ONE commit. Always.**
+## 🤖 AI-Optimized Mode
+Designed for AI to handle commits autonomously with minimal overhead:
+- **Auto-Detection**: Parse `git diff` to identify logical units using file patterns, function changes, or keyword analysis (e.g., group by feature/bug).
+- **Batch Staging**: Use `git add <auto-grouped-files>` for efficiency; avoid interactive modes unless necessary.
+- **Conditional Logic**: If total changes <10 lines, allow single commit; if >10 lines, split into multiple atomic commits automatically.
+- **Internal Validation & Fallback**: Run atomicity checks after each commit; on failure, auto-reset (`git reset HEAD~1`) and retry with adjusted grouping.
+- **Template Integration**: Pull from Cheatsheet.md for message generation, ensuring conventional format.
+This mode prioritizes speed and accuracy for AI, while enforcing absolute rules.
 ## 🔄 Self-Correction & Multi-Commit Strategy
 To maintain high precision during long sessions, follow this execution logic:
 1. **Plan First**: List ALL proposed commit messages before executing any `git` command.
 2. **State Check**: Every 3 commits, pause and re-verify against "Absolute Rules".
 3. **Reflect**: Ensure the Body (What & Why) remains detailed, even in the 10th commit.
-## 🛠 The 5-Step Workflow
+## 🛠 The 4-Step AI Workflow
+Optimized for AI automation:
+### 1. Auto-Discover & Group
+Parse `git diff` to auto-identify and group logical units using patterns (e.g., file types, functions).
+### 2. Smart Stage
+Stage grouped files: `git add <auto-grouped-files>` (batch mode).
+### 3. Commit with AI Template
+Generate and apply commit message using templates from Cheatsheet.md.
+### 4. Repeat with Fallback
+Process remaining changes; on validation failure, auto-reset and retry.
+## 🛠 The 5-Step Manual Workflow
+For human use or manual override:
 ### 1. Discover
 `git status && git diff`
 Map all changes and identify logical boundaries.
