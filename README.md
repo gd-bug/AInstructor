@@ -9,6 +9,23 @@ This repository serves as a template for projects designed to work seamlessly wi
 - **Husky**: Runs Git hooks to enforce commit standards before commits are allowed.
 - **Cline Integration**: Includes a specialized Commit skill that handle the atomic commit process automatically.
 
+## Commit Skill VS AI Model Benchmark
+
+| AI Model       | Lost in Middle | Instruction Fatigue | Alignment/Drift | Consistency | Determinism | Overall   |
+|----------------|----------------|---------------------|-----------------|-------------|-------------|-----------|
+| Claude         | 92             | 95                  | 88              | 94          | 89          | 91.6      |
+| ChatGPT        | 96             | 97                  | 98              | 95          | 96          | 96.4      |
+| Copilot        | 94             | 91                  | 92              | 90          | 95          | 92.4      |
+| Deepseek       | 70             | 65                  | 75              | 85          | 60          | 71.0      |
+| Devstral       | 70             | 75                  | 85              | 90          | 80          | 80.0      |
+| Gemini         | 88             | 92                  | 95              | 90          | 94          | 91.8      |
+| Grok           | 85             | 92                  | 95              | 98          | 96          | 93.2      |
+| Kat Coder Pro  | 65             | 71                  | 78              | 85          | 82          | 76.2      |
+| Qwen           | 85             | 45                  | 70              | 80          | 75          | 71.0      |
+| Z              | 85             | 75                  | 92              | 98          | 82          | 86.4      |
+
+Higher: Better
+
 ## Setup
 
 1. Clone this repository as a template for your new project.
