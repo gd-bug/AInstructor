@@ -7,7 +7,7 @@ This repository serves as a template for projects designed to work seamlessly wi
 - **Atomic Conventional Commits**: Enforces the principle of one logical change per commit, maintaining a clean and understandable project history.
 - **Commitlint**: Automatically validates commit messages against the conventional commit format to ensure consistency.
 - **Husky**: Runs Git hooks to enforce commit standards before commits are allowed.
-- **Cline Integration**: Includes a specialized Commit skill that guides users through the atomic commit process.
+- **Cline Integration**: Includes a specialized Commit skill that handle the atomic commit process automatically.
 
 ## Setup
 
