@@ -1,28 +1,37 @@
 module.exports = {
   extends: ['@commitlint/config-conventional'],
   rules: {
-    // Types sesuai SKILL.md
+    // ✅ Types sesuai SKILL.md
     'type-enum': [
       2,
       'always',
       ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'chore']
     ],
-    // Scope wajib ada
-    'scope-case': [2, 'always', 'lower-case'],
+
+    // ✅ Scope wajib ada dan lowercase
     'scope-empty': [2, 'never'],
-    // Subject: max 72 chars, lowercase start
-    'subject-case': [2, 'never', ['start-case', 'pascal-case', 'upper-case']],
+    'scope-case': [2, 'always', 'lower-case'],
+
+    // ✅ Subject: max 72 chars, lowercase start, imperative mood
     'subject-max-length': [2, 'always', 72],
-    // Body wajib
-    'body-leading-blank': [2, 'always'],
+    'subject-case': [2, 'never', ['start-case', 'pascal-case', 'upper-case']],
+    // Note: subject-blacklist not supported in commitlint, generic descriptions prevented via convention
+
+    // ✅ Body wajib ada, dengan blank line sebelum body
     'body-empty': [2, 'never'],
-    // Footer untuk BREAKING CHANGE
-    'footer-leading-blank': [1, 'always'],
-    // Allow ! untuk breaking changes
-    'subject-exclamation-mark': [1, 'never'],
-    // Header format
-    'header-max-length': [2, 'always', 100] // Allow some buffer for scope
+    'body-leading-blank': [2, 'always'],
+    'body-max-line-length': [2, 'always', 300], // Allow longer body lines for detailed explanations
+
+    // ✅ Footer untuk BREAKING CHANGE & issue refs
+    'footer-leading-blank': [2, 'always'],
+
+    // ❌ Jangan larang tanda seru (!) → breaking change marker
+    'subject-exclamation-mark': [0],
+
+    // ✅ Header format (buffer untuk scope panjang)
+    'header-max-length': [2, 'always', 100]
   },
+
   parserPreset: {
     parserOpts: {
       // Support untuk ! pada akhir type(scope)
