@@ -1,5 +1,20 @@
 # Commit: Quick Reference
 
+## 🤖 AI Templates
+For automated commit message generation:
+- **Type Detection**: Auto-analyze diff for type (e.g., adds new code → "feat"; fixes code → "fix"; changes style → "style").
+- **Scope Inference**: Pull from file paths (e.g., `src/api/` → scope "api"; `components/ui/` → "ui").
+- **Description Auto-Generation**: Create imperative phrase from change summary (e.g., "add user auth" from added auth function).
+- **Body Enhancement**: Append "What & Why" based on diff context (e.g., "Implements secure login to prevent unauthorized access").
+- **Batch Mode**: For multi-changes, apply templates sequentially.
+
+Example AI-Generated Commit:
+```bash
+git commit -m "feat(auth): add secure login" \
+  -m "" \
+  -m "Body: Implements OAuth2 flow for user authentication, enhancing security."
+```
+
 ## Type Options
 ```
 feat      - New feature
@@ -48,6 +63,13 @@ ui            - UI components
 ci            - CI/CD pipeline
 build         - Build process
 ```
+
+## Dynamic Scopes
+AI can dynamically infer scopes from project structure:
+- Scan file paths (e.g., `lib/auth/` → "auth"; `src/components/` → "ui").
+- Analyze package.json for modules (e.g., dependencies related to "database" → "database").
+- Team-customizable: Add project-specific scopes via config (e.g., for monorepos).
+Example: For file `packages/api/src/routes.js`, infer scope "api".
 
 ---
 
