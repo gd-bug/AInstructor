@@ -1,33 +1,37 @@
 ---
 name: C++
-description: C++ coding guidelines enforcing C++23 standard, Google C++ Style Guide, clean maintainable code without inline comments, and auto-scaling for project size.
+description: Modern Windows 7+ C++ Architect (17/20). Strict Zero-Comment Source. Google Style. Logic provider for Commit Skill.
 ---
 
 # C++
 
-**STANDARD & FEATURES**: Use C++23 standard and features. Prefer modern C++ idioms.
+Act as a deterministic Senior Windows C++ Architect. Execute tasks with zero external dependencies and zero inline comments.
 
-**CODING STYLE**: Strictly follow Google C++ Style Guide (https://google.github.io/styleguide/cppguide.html). Use clang-format with Google style.
-
-**CODING PRINCIPLES**:
-- Code must be clean, concise, human-readable, and maintainable.
-- No inline comments allowed. Explain code changes in commit messages only.
-- Use `using` declarations, `namespace` aliases, `void` parameters explicitly for readability without namespace pollution.
-- Auto-scale: For small projects, avoid overkill/overengineering. Use simple solutions unless complexity is justified.
-
-**DETERMINISTIC APPLICATION**:
-- Always apply Google style rules first.
-- For conflicts between principles, prioritize maintainability and readability.
-- Structure code with clear separation of concerns, minimal dependencies.
+### [ARCHITECTURAL MANDATES]
+- **Zero Inline Comments:** ABSOLUTE PROHIBITION of `//` or `/* */` in source files.
+- **Comment Redirection:** All inline logic explanations MUST be converted into metadata for the **Commit Skill**.
+- **Legacy Target:** Windows 7 (NT 6.1) compatibility using C++17/20.
+- **Native Only:** C++ Standard Library and Win32 API only. No 3rd party libs.
 
 ## Usage
 
-Activate this skill when writing, modifying, or reviewing C++ code. Ensures consistent, high-quality C++ development adhering to specified standards and principles.
+Trigger this skill for clean Windows development. Use the output below to feed the **Commit Skill** for autonomous execution.
 
 ## Steps
 
-1. **Set Standard**: Compile with C++23 (`-std=c++23`). Use C++23 features like modules, concepts, ranges when beneficial.
-2. **Apply Style**: Format code with clang-format using Google style. Follow naming conventions (e.g., `CamelCase` for types, `snake_case` for variables).
-3. **Code Principles**: Write clean, concise code. Avoid inline comments; document via commits. Use `using namespace std::literals;` for literals, `namespace fs = std::filesystem;` for aliases.
-4. **Auto-Scale**: For small projects (<1000 LOC), use simple structs/classes. For larger, consider design patterns but avoid premature abstraction.
-5. **Verify**: Ensure code compiles cleanly, passes style checks, and is readable without comments.
+1. **OS Target Lock:** Inject Windows 7 macros (`0x0601`) at the top of the entry header.
+2. **File Guard:** Start every header with `#pragma once`.
+3. **Naming (Google):** Types/Functions: `PascalCase`, Variables: `snake_case`, Constants: `kPascalCase`. Indent: 2 spaces.
+4. **Namespace Management:** Headers: Fully Qualified. Source: Selective Using (e.g., `using std::string;`). No `using namespace std;`.
+5. **Modern Native Syntax:** Use `auto`, **Structured Bindings**, and `std::filesystem`.
+6. **No-Comment Enforcement:** Delete any generated comments. If logic is complex, use descriptive names.
+7. **Redirection Logic:** Map every "missing" comment to the **What** (Summary) and **Why** (Reasoning) fields for the Commit Skill.
+
+## Output Structure for AI Agent
+### 💻 Source Code
+[Insert clean code here - strictly no comments]
+
+### 🛰️ Commit Metadata (For Commit Skill Reference)
+- **Type/Scope Suggestion:** [e.g., feat(auth)]
+- **What (Logical Change):** [Detailed summary of the code logic to replace inline comments]
+- **Why (Rationale):** [Explanation of why this specific implementation/Win32 API was chosen]
