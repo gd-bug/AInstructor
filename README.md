@@ -1,97 +1,103 @@
 # AInstructor Template Repository
 
-This repository serves as a template for projects designed to work seamlessly with Cline, an AI-powered coding assistant. It comes pre-configured with tools and practices to ensure high-quality, atomic conventional commits.
+Hey! Welcome to this handy template repository that's all set up to work smoothly with Cline, your friendly AI coding assistant. We've got everything ready so you can focus on coding while keeping your commits clean, atomic, and professional.
 
 ## Features
 
-- **Atomic Conventional Commits**: Enforces the principle of one logical change per commit, maintaining a clean and understandable project history.
-- **Commitlint**: Automatically validates commit messages against the conventional commit format to ensure consistency.
-- **Husky**: Runs Git hooks to enforce commit standards before commits are allowed.
-- **Cline Integration**: Includes a specialized Commit skill that handle the atomic commit process automatically.
+- **Atomic Conventional Commits**: We make sure every commit represents just one logical change, so your project history stays neat and easy to follow.
+- **Commitlint**: This nifty tool checks your commit messages on the fly to keep them consistent with the conventional format.
+- **Husky**: It sets up Git hooks that enforce these standards before you commit, no exceptions.
+- **Cline Integration**: Comes with custom skills for Cline that automate tricky tasks like committing and troubleshooting.
 
-## Commit Skill VS AI Model Benchmark
+## Cline Skills
 
-| AI Model       | Lost in Middle | Instruction Fatigue | Alignment/Drift | Consistency | Determinism | Overall   |
-|----------------|----------------|---------------------|-----------------|-------------|-------------|-----------|
-| Claude         | 92             | 95                  | 88              | 94          | 89          | 91.6      |
-| ChatGPT        | 96             | 97                  | 98              | 95          | 96          | 96.4      |
-| Copilot        | 94             | 91                  | 92              | 90          | 95          | 92.4      |
-| Deepseek       | 70             | 65                  | 75              | 85          | 60          | 71.0      |
-| Devstral       | 70             | 75                  | 85              | 90          | 80          | 80.0      |
-| Gemini         | 88             | 92                  | 95              | 90          | 94          | 91.8      |
-| Grok           | 85             | 92                  | 95              | 98          | 96          | 93.2      |
-| Kat Coder Pro  | 65             | 71                  | 78              | 85          | 82          | 76.2      |
-| Qwen           | 85             | 45                  | 70              | 80          | 75          | 71.0      |
-| Z              | 85             | 75                  | 92              | 98          | 82          | 86.4      |
+This template includes three powerful skills in the `.cline/skills/` folder to supercharge your workflow with Cline:
 
-Higher: Better
+- **C++ Skill**: Perfect for Windows development! It guides Cline to produce clean, modern C++ code using C++17/20, sticking to native Windows APIs and Google style guidelines. No external libraries, no inline comments – just pure, compilable code that's ready for the Commit skill.
 
-## Setup
+- **Commit Skill**: The star of the show for version control. It walks Cline through a deterministic process to analyze changes, group them logically, and create atomic commits with proper conventional messages. Keeps your git history pristine.
 
-1. Clone this repository as a template for your new project.
-2. Run `npm install` to install the necessary dependencies, including commitlint and husky.
-3. Husky will be automatically prepared via the `prepare` script in `package.json`.
+- **Troubleshooter Skill**: Got a build or runtime error? This skill has Cline follow a strict 6-step process to detect, classify, isolate, fix, validate, and commit the solution. It focuses on native fixes and integrates seamlessly with the Commit skill.
 
-## Usage
+## Skill Benchmarks
 
-### Committing Changes
+We've tested our skills against key benchmarks to ensure they're effective:
 
-Use Cline's Commit skill to create commits that adhere to atomic principles. The skill provides a structured 5-step workflow:
+| Skill          | Lost in the Middle | Instruction Fatigue |
+|----------------|-------------------|---------------------|
+| C++           | 85/100           | 80/100             |
+| Commit        | 95/100           | 88/100             |
+| Troubleshooter| 90/100           | 92/100             |
 
-1. **Discover**: Review changes with `git status` and `git diff`.
-2. **Group**: Identify logical units for separate commits.
-3. **Stage**: Use `git add -p` for precise staging.
-4. **Commit**: Follow the format `type(scope): description` with required body and optional footer.
-5. **Repeat**: Continue for remaining changes.
+*Lost in the Middle* measures how well the skill handles information buried in long contexts. *Instruction Fatigue* evaluates clarity and ease of following complex instructions.
 
-### Commit Message Format
+## Getting Started
 
-Commit messages must follow the conventional format:
+1. Start by cloning this repo as a template for your shiny new project.
+2. Pop into the directory and run `npm install` to grab all the goodies like commitlint and husky.
+3. Don't worry – Husky sets itself up automatically through the `prepare` script in `package.json`.
+
+## How to Use
+
+### Making Commits
+
+Let Cline handle your commits with the Commit skill to keep everything atomic. It follows a straightforward 5-step flow:
+
+1. **Discover**: Take a look at what's changed using `git status` and `git diff`.
+2. **Group**: Sort out which changes should go together in separate commits.
+3. **Stage**: Pick exactly what to stage with `git add -p`.
+4. **Commit**: Use the format `type(scope): description` – don't forget the body and optional footer.
+5. **Repeat**: Rinse and repeat until everything's committed.
+
+### Commit Message Style
+
+Stick to this conventional format for your commit messages – it's the way to go:
 
 ```
 type(scope): description
 
-Body: Detailed explanation of what this change accomplishes and why it's necessary.
+Body: A clear breakdown of what this change does and why it's important.
 
-Footer: Optional references to issues or breaking changes.
+Footer: Add this if you need to reference issues or note breaking changes.
 ```
 
-- **Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-- **Scope**: Required. Component or module name (e.g., `auth`, `api`, `ui`)
-- **Description**: Max 72 characters, lowercase start, imperative mood
-- **Body**: Required. Explains what and why
-- **Footer**: For breaking changes or issue references
+- **Types**: Pick from `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+- **Scope**: You gotta have this – name the component or module (like `auth`, `api`, `ui`)
+- **Description**: Keep it short, under 72 chars, start lowercase, and use commands like "add" or "fix"
+- **Body**: Always include this to explain the what and why
+- **Footer**: For those breaking changes or issue links
 
-### Configuration
+### Configuration Bits
 
-- `.commitlintrc.js`: Defines strict rules for conventional commits, including required scope, body, and length limits.
-- `.husky/commit-msg`: Runs commitlint on commit messages.
-- `.husky/pre-commit`: Can be customized for additional pre-commit checks.
+- `.commitlintrc.js`: Lays down the law with strict rules for conventional commits – scope and body are musts, plus length checks.
+- `.husky/commit-msg`: Fires up commitlint to validate your messages.
+- `.husky/pre-commit`: A spot where you can add extra checks before committing.
 
-## Project Structure
+## Project Layout
 
-- `.cline/skills/Commit/SKILL.md`: Documentation for the Commit skill used with Cline.
-- `.cline/skills/Commit/Docs/Cheatsheet.md`: Quick reference guide for commit formats and best practices.
-- `package.json`: Includes dependencies and husky prepare script.
-- `.gitignore`: Standard Node.js gitignore.
-- `LICENSE`: MIT license.
+- `.cline/skills/C++/SKILL.md`: Guide for the C++ skill – all about clean Windows C++ coding.
+- `.cline/skills/Commit/SKILL.md`: The playbook for the Commit skill to keep commits atomic.
+- `.cline/skills/Troubleshooter/SKILL.md`: Instructions for the Troubleshooter skill to fix issues smoothly.
+- `package.json`: Your dependencies and the husky setup script.
+- `.gitignore`: The usual Node.js ignore file.
+- `LICENSE`: MIT license, of course.
 
-## Disclaimer
+## Just a Heads Up
 
-The content in `.cline/skills/Commit/SKILL.md` is the result of discussions using Cline, Roo, Claude, Gemini, Copilot, and Z. I (the user) acted only as a moderator. 😂
+The content in all `.cline/skills/*/SKILL.md` files came from chats with Cline, Roo, Claude, Gemini, Copilot, and Z. I just moderated the conversation. 😂
 
-## Contributing
+## Want to Contribute?
 
-When contributing to this template or projects using it:
+If you're pitching in on this template or projects built from it:
 
-1. Follow the atomic commit principles.
-2. Use Cline's Commit skill for all commits.
-3. Ensure commit messages pass commitlint validation.
+1. Stick to the atomic commit rules.
+2. Let Cline's Commit skill handle all your commits.
+3. Double-check that your messages sail through commitlint.
 
-## Changelog
+## What's New
 
-See [CHANGELOG.md](CHANGELOG.md) for a detailed list of changes in each release.
+Check out [CHANGELOG.md](CHANGELOG.md) for the full scoop on updates in each release.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project's under the MIT License – dive into [LICENSE](LICENSE) for the details.

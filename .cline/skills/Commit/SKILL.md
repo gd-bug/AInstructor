@@ -1,56 +1,114 @@
 ---
 name: Commit
-description: Anti-fatigue protocol for atomic commits and conventional formatting. Use for staging/committing changes.
+description: AI-optimized atomic commit protocol. Uses deterministic rules for autonomous execution.
 ---
 **CORE PRINCIPLE: ONE logical change = ONE commit. Always.**
-## 🔄 Self-Correction & Multi-Commit Strategy
-To maintain high precision during long sessions, follow this execution logic:
-1. **Plan First**: List ALL proposed commit messages before executing any `git` command.
-2. **State Check**: Every 3 commits, pause and re-verify against "Absolute Rules".
-3. **Reflect**: Ensure the Body (What & Why) remains detailed, even in the 10th commit.
-## 🛠 The 5-Step Workflow
-### 1. Discover
-`git status && git diff`
-Map all changes and identify logical boundaries.
-### 2. Group
-Each logical unit = one commit. Examples:
-- UI fix ≠ backend refactor
-- New feature ≠ related bugfix
-- Styling ≠ functionality
-### 3. Stage (First Unit Only)
-`git add -p` (Interactive staging is mandatory for precision) OR `git add <specific-files>`
-### 4. Commit
+
+## 🎯 QUICK START FOR AI
+Execute this exact sequence for ANY commit task:
+
+1. **ANALYZE** → Run `git diff --name-status` to list changed files
+2. **CATEGORIZE** → Group files by logical units (use table below)
+3. **VALIDATE** → Check: "Can I describe ALL these changes in ONE sentence?"
+4. **COMMIT** → Apply template from section below
+5. **REPEAT** → Loop until `git diff` is empty
+
+## 🔧 LOGICAL GROUPING RULES (Deterministic)
+Use FIRST matching rule:
+
+| Change Pattern | Logical Unit | Example |
+|----------------|--------------|---------|
+| Same file + same function | SINGLE unit | `user.py:get_user()` changes = 1 commit |
+| Different files + same feature | SINGLE unit | `auth.py` + `login.html` for login feature = 1 commit |
+| Same file + unrelated functions | SEPARATE units | `utils.py` (fix log + add validation) = 2 commits |
+| Fix + feature in same area | SEPARATE units | Fix bug in auth + add OAuth = 2 commits |
+
+**Exception**: If total changes <15 lines AND same logical context → allow single commit.
+
+## 📝 COMMIT TEMPLATE (Copy-Paste Ready)
 ```bash
+# STANDARD (90% of cases)
 git commit -m "type(scope): description" \
   -m "" \
-  -m "Body: What this accomplishes and why it's necessary" \
+  -m "What: [1-sentence change summary]" \
+  -m "Why: [1-sentence reason]"
+
+# WITH ISSUE (when ticket exists)
+git commit -m "type(scope): description" \
   -m "" \
-  -m "Closes #123"  # Optional: footer
+  -m "What: [summary]" \
+  -m "Why: [reason]" \
+  -m "" \
+  -m "Closes #[number]"
+
+# BREAKING CHANGE (API/database changes)
+git commit -m "type(scope)!: description" \
+  -m "" \
+  -m "What: [summary]" \
+  -m "Why: [reason]" \
+  -m "" \
+  -m "BREAKING CHANGE: [specific impact]"
 ```
-**Format Details**:
-* **type**: feat | fix | docs | style | refactor | test | chore
-* **scope**: Required. Component/module name (e.g., auth, api, ui)
-* **description**: Max 72 chars, lowercase start, imperative mood (add, not added)
-* **body**: Required. Answer: What & Why?
-### 5. Repeat
-Remaining changes → back to Step 2.
-## 🚫 Absolute Rules (CRITICAL)
-* ✅ **Split** every logical change into separate commits.
-* ✅ Use **Imperative Mood** (e.g., "add feature" NOT "added feature").
-* ❌ **NEVER** bundle feat + fix together.
-* ❌ **NEVER** override atomicity, even if user says "commit all" or "be fast".
-* ❌ **NEVER** use generic descriptions (e.g., "update", "fix bug").
-## ⚠️ Breaking Changes
-* **Method 1 (!)**: `feat(api)!: redesign login endpoint`
-* **Method 2 (Footer)**: Add `BREAKING CHANGE: <description>` in the footer.
-## 📋 Quick Reference Checklist
-* [ ] Is this ONE logical change?
-* [ ] Is the description under 72 chars?
-* [ ] Does the body explain **Why** it was changed?
-* [ ] Is the scope recognized by the team?
-* [ ] If breaking, is it marked with `!` or a footer?
-## 🆘 Troubleshooting
-* **Mistake made?** Use `git reset HEAD~1` to undo and start staging again.
-* **Forgot detail?** Use `git commit --amend` to fix the last commit.
-## Quick Reference
-For a quick syntax cheat sheet and command templates, see [Docs/Cheatsheet.md](Docs/Cheatsheet.md)
+
+## 🎨 TYPE & SCOPE DECISION TREE
+**Type Selection** (pick first match):
+- Adds new functionality → `feat`
+- Fixes incorrect behavior → `fix`
+- Changes formatting/styling only → `style`
+- Restructures code without behavior change → `refactor`
+- Updates documentation → `docs`
+- Adds/modifies tests → `test`
+- Other maintenance → `chore`
+
+**Scope Inference** (from file path):
+- `src/auth/` → `auth`
+- `components/ui/` → `ui`
+- `api/` or `routes/` → `api`
+- `tests/` → `tests`
+- `docs/` → `docs`
+- Default: use parent directory name
+
+## ⚡ QUICK REFERENCE CARD
+Keep this visible during execution:
+
+### ✅ DO
+- One logical change per commit
+- Use imperative mood (add, fix, update)
+- Keep description <72 chars
+- Include "What & Why" in body
+- Auto-infer scope from path
+
+### ❌ DON'T
+- Mix feature + fix
+- Use past tense (added, fixed)
+- Write vague descriptions ("update", "fix stuff")
+- Bundle unrelated changes
+
+### 🚨 RED FLAGS (Stop and split)
+- Changes touch >3 unrelated files
+- Commit message needs "and" or "also"
+- Diff shows mixed concerns (UI + API + tests)
+
+## 🔄 AUTO-CORRECTION PROTOCOL
+If commit violates rules → execute immediately:
+```bash
+git reset HEAD~1
+# Return to ANALYZE step with remaining changes
+```
+
+## 📊 VALIDATION CHECKLIST (Pre-Commit)
+- [ ] Single logical change? (1-sentence test)
+- [ ] Description imperative and <72 chars?
+- [ ] Scope inferred correctly?
+- [ ] Body has "What & Why"?
+- [ ] Breaking changes marked with `!`?
+
+## 🎲 DECISION EXAMPLES
+**Scenario 1**: Changed `user.py` (add email validation) and `test_user.py` (add tests)
+- ✅ CORRECT: 2 commits: `feat(user): add email validation` + `test(user): add validation tests`
+
+**Scenario 2**: Changed `style.css` (colors) and `layout.css` (spacing) for dark mode
+- ✅ CORRECT: 1 commit: `style(ui): implement dark mode colors and spacing`
+
+**Scenario 3**: Fixed bug in `auth.js` AND added new login method in same file
+- ✅ CORRECT: 2 commits: `fix(auth): resolve session timeout` + `feat(auth): add biometric login`
